@@ -1,4 +1,4 @@
-1. **Jako system transakcyjny**, chcę informować biletomat o statusie transakcji (sukces, odrzucenie, brak środków), aby użytkownik wiedział, co dalej robić.\
+1. **Jako system transakcyjny**, chcę informować biletomat o statusie transakcji (sukces, odrzucenie, brak środków), aby użytkownik wiedział, co dalej robić.
 1. **Jako system transakcyjny**, chcę rejestrować dane o transakcjach (czas, metoda płatności, kwota) dla celów księgowych i zgodności z przepisami.
 1. **Jako system transakcyjny**, chcę autoryzować płatności kartą w czasie 
 rzeczywistym, aby transakcje były szybkie i bezpieczne.
