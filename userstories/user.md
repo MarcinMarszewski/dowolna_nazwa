@@ -13,7 +13,7 @@ licznik czasu), aby móc szybko podjąć działanie.
 
 ```mermaid
 flowchart LR
-subgraph "1"
+subgraph "Szybki wybór rodzaju biletu"
   A@{ shape: manual-file, label: "Użytkownik" }
   id1[Szybki wybór rodzaju biletu]
   id2[Sprawdzenie biletów]
@@ -25,7 +25,7 @@ subgraph "1"
   id1-- include ---id3
   id4-- extend ---id1
 end
-subgraph "2"
+subgraph "Wybór języka"
   B@{ shape: manual-file, label: "Użytkownik" }
   B --> id5;
   id5[Wybór języka] --include--> id6;
@@ -35,4 +35,26 @@ subgraph "2"
   id7[Anulowanie transakcji];
   id8[Lista popularnych języków];
 end
+```
+
+### Wspólny diagram przypadków użycia
+
+```mermaid
+flowchart LR
+  A@{ shape: manual-file, label: "Użytkownik" }
+  id1[Szybki wybór rodzaju biletu]
+  id2[Sprawdzenie biletów]
+  id3[Anulowanie transakcji]
+  id4[Podpowiedź interfejsu]
+
+  A --> id1
+  id1-- include ---id2
+  id1-- include ---id3
+  id4-- extend ---id1
+  A --> id5;
+  id5[Wybór języka] --include--> id6;
+  id5 --include--> id3;
+  id8 --extend--> id5;
+  id6[Domyślny język];
+  id8[Lista popularnych języków];
 ```
