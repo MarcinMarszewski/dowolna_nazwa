@@ -9,10 +9,21 @@ nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 ## Diagram przypadków użycia
 
 ```mermaid
-flowchart TD;
+flowchart TD
+subgraph "Wybór języka"
   A@{ shape: manual-file, label: "Biletomat" } --> UC1
   UC1[Wybór języka] --include--> UC2;
   UC3 --extend--> UC1;
   UC2[Opcje językowe];
   UC3[Powrót do języka domyślnego];
+end
+subgraph "Wyświetlenie dostępnych biletów"
+  B@{ shape: manual-file, label: "Biletomat" }
+  UC4[Wyświetlenie dostępnych biletów]
+  UC5[Aktualizacja biletów]
+  UC6[Awaria sieci]
+  B --> UC4
+  UC4-- include ---UC5
+  UC6-- extend ---UC4
+end
 ```
