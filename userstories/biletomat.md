@@ -5,3 +5,14 @@
 2. **Jako biletomat**, chcę być wyposażony w różne metody płatności (terminal kart, czytnik gotówki, NFC), aby obsługiwać różnorodne transakcje.
 3. **Jako biletomat**, chcę wydawać resztę w gotówce, jeśli użytkownik zapłaci 
 nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
+
+## Diagram przypadków użycia
+
+```mermaid
+flowchart TD;
+  A@{ shape: manual-file, label: "Biletomat" } --> UC1
+  UC1[Wybór języka] --include--> UC2;
+  UC3 --extend--> UC1;
+  UC2[Opcje językowe];
+  UC3[Powrót do języka domyślnego];
+```
