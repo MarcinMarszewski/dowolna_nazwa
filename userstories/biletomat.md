@@ -27,3 +27,19 @@ subgraph "Wyświetlenie dostępnych biletów"
   UC6-- extend ---UC4
 end
 ```
+## Wspólny diagram
+
+```mermaid
+flowchart LR
+  A@{ shape: manual-file, label: "Biletomat" } --> UC1
+  A --> UC4
+  UC1[Wybór języka] --include--> UC2;
+  UC3 --extend--> UC1;
+  UC2[Opcje językowe];
+  UC3[Powrót do języka domyślnego];
+  UC4[Wyświetlenie dostępnych biletów]
+  UC5[Aktualizacja biletów]
+  UC6[Awaria sieci]
+  UC4-- include ---UC5
+  UC6-- extend ---UC4
+```
