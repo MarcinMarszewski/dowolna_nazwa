@@ -12,7 +12,7 @@ nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 flowchart TD;
   A@{ shape: manual-file, label: "Biletomat" } --> UC1
   UC1[Wybór języka] --include--> UC2;
-  UC1 --extend--> UC3;
+  UC3 --extend--> UC1;
   UC2[Opcje językowe];
   UC3[Powrót do języka domyślnego];
 ```
