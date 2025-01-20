@@ -11,20 +11,38 @@ nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 ```mermaid
 flowchart TD
 subgraph "Wybór języka"
-  A@{ shape: manual-file, label: "Biletomat" } --> UC1
-  UC1[Wybór języka] --include--> UC2;
-  UC3 --extend--> UC1;
-  UC2[Opcje językowe];
-  UC3[Powrót do języka domyślnego];
+  A@{ shape: manual-file, label: "Biletomat" }
+  id1[Wyświetlenie opcji językowych]
+  id2[Rejestracja wyboru języka]
+  id3[Dostosowanie interfejsu]
+  id4[Wyświetlenie opcji językowych]
+  id5[Powrót do języka domyślnego]
+
+  A --> id1
+  A --> id2
+  A --> id3
+  id5-. extend .-> id1
+  id5-. extend .-> id2
+  id5-. extend .-> id3
+  id1-. include .-> id4
+  
 end
 subgraph "Wyświetlenie dostępnych biletów"
   B@{ shape: manual-file, label: "Biletomat" }
-  UC4[Wyświetlenie dostępnych biletów]
-  UC5[Aktualizacja biletów]
-  UC6[Awaria sieci]
-  B --> UC4
-  UC4-- include ---UC5
-  UC6-- extend ---UC4
+  id11[Uruchomienie ekranu powitalnego]
+  id22[Pobranie listy biletów]
+  id33[Wyświetlenie biletów]
+  id44[Oczekiwanie na wybór użytkownika]
+  id55[Aktualizacja biletów]
+  id66[Ostrzeżenie o braku danych]
+
+  B --> id11
+  B --> id22
+  B --> id33
+  B --> id44
+  id22-. include .-> id55
+  id66-. extend .-> id22
+  
 end
 ```
 ## Wspólny diagram
