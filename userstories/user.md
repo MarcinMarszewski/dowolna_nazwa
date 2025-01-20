@@ -15,25 +15,51 @@ licznik czasu), aby móc szybko podjąć działanie.
 flowchart LR
 subgraph "Szybki wybór rodzaju biletu"
   A@{ shape: manual-file, label: "Użytkownik" }
-  id1[Szybki wybór rodzaju biletu]
+  id1[Rozpoczęcie interakcji]
   id2[Sprawdzenie biletów]
   id3[Anulowanie transakcji]
-  id4[Podpowiedź interfejsu]
+  id4[Wyświetlenie podpowiedzi interfejsu]
+  id11[Wybranie kategorii]
+  id111[Wybranie biletu]
+  id1111[Potwierdzenie wyboru]
 
   A --> id1
-  id1-- include ---id2
-  id1-- include ---id3
-  id4-- extend ---id1
+  A --> id11
+  A --> id111
+  A --> id1111
+  id1-. include .-> id3
+  id11-. include .-> id3
+  id111-. include .-> id3
+  id1111-. include .-> id3
+  id111-. include .-> id2
+  id4-. extend .-> id11
+  id4-. extend .-> id111
+  
 end
 subgraph "Wybór języka"
   B@{ shape: manual-file, label: "Użytkownik" }
+  id5[Wybranie języka]
+  id6[Ustawienie domyślnego języka]
+  id7[Anulowanie transakcji]
+  id8[Wyświetlenie listy popularnych języków]
+  id22[Rozpoczęcie interakcji]
+  id222[Wyświetlenie opcji języka]
+  id2222[Dostosowanie interfejsu]
+
   B --> id5;
-  id5[Wybór języka] --include--> id6;
-  id5 --include--> id7;
-  id8 --extend--> id5;
-  id6[Domyślny język];
-  id7[Anulowanie transakcji];
-  id8[Lista popularnych języków];
+  B --> id22;
+  B --> id222;
+  B --> id2222;
+  id5-. include .-> id7
+  id22-. include .-> id7
+  id222-. include .-> id7
+  id2222-. include .-> id7
+  id2222-. include .-> id6
+  id8-. extend .-> id222
+  
+
+
+
 end
 ```
 
