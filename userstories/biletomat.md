@@ -9,7 +9,7 @@ nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 ## Diagram przypadków użycia
 
 ```mermaid
-flowchart TD
+flowchart LR
 subgraph "Wybór języka"
   A@{ shape: manual-file, label: "Biletomat" }
   id1[Wyświetlenie opcji językowych]
@@ -42,8 +42,29 @@ subgraph "Wyświetlenie dostępnych biletów"
   B --> id44
   id22-. include .-> id55
   id66-. extend .-> id22
-  
+
 end
+subgraph "Wyświetlenie podsumowania transakcji"
+  C@{ shape: manual-file, label: "Biletomat" }
+  uc1[Gromadzenie danych o transakcji]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Oczekiwanie na decyzję użytkownika]
+  uc4[Obsługa anulowania]
+
+  C --> uc1
+  C --> uc2
+  C --> uc3
+
+  uc1-. include .-> uc2
+  uc4-. extend .-> uc3
+
+end
+subgraph "Generowanie potwierdzenia zakupu"
+  D@{ shape: manual-file, label: "Biletomat" }
+
+
+end
+
 ```
 ## Wspólny diagram
 
