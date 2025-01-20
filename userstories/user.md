@@ -56,11 +56,27 @@ subgraph "Wybór języka"
   id2222-. include .-> id7
   id2222-. include .-> id6
   id8-. extend .-> id222
-  
-
-
-
 end
+subgraph "Sprawdzenie poprawności transakcji"
+  C@{ shape: manual-file, label: "Użytkownik" }
+  uc1[Wybór biletu i płatności]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Potwierdzenie lub cofnięcie]
+  uc4[Kontynuacja lub anulowanie]
+  uc5[Anulowanie transakcji]
+  uc7[Ostrzeżenie o błędzie]
+
+  C --> uc1
+  C --> uc3
+  C --> uc4
+  uc1-. include .-> uc5
+  uc2-. include .-> uc5
+  uc3-. include .-> uc5
+  uc4-. include .-> uc5
+  uc1-. include .-> uc2
+  uc7-. extend .-> uc1
+  
+  end
 ```
 
 ### Wspólny diagram przypadków użycia
