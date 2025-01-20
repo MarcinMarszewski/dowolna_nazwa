@@ -77,6 +77,25 @@ subgraph "Sprawdzenie poprawności transakcji"
   uc7-. extend .-> uc1
   
   end
+  subgraph "Otrzymanie potwierdzenia zakupu"
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Generowanie potwierdzenia]
+  u2[Odebranie potwierdzenia]
+  u3[Komunikat o zakończeniu]
+  u4[Anulowanie transakcji]
+  u5[Generowanie biletu]
+  u6[Wybór formy potwierdzenia]
+
+  D --> u1
+  D --> u2
+  D --> u3
+  u1-. include .-> u4
+  u2-. include .-> u4
+  u3-. include .-> u4
+  u1-. include .-> u5
+  u6-. extend .-> u1
+
+  end
 ```
 
 ### Wspólny diagram przypadków użycia
