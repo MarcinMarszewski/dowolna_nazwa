@@ -83,15 +83,59 @@ end
 
 ```mermaid
 flowchart LR
-  A@{ shape: manual-file, label: "Biletomat" } --> UC1
-  A --> UC4
-  UC1[Wybór języka] --include--> UC2;
-  UC3 --extend--> UC1;
-  UC2[Opcje językowe];
-  UC3[Powrót do języka domyślnego];
-  UC4[Wyświetlenie dostępnych biletów]
-  UC5[Aktualizacja biletów]
-  UC6[Awaria sieci]
-  UC4-- include ---UC5
-  UC6-- extend ---UC4
+  A@{ shape: manual-file, label: "Biletomat" }
+  id1[Wyświetlenie opcji językowych]
+  id2[Rejestracja wyboru języka]
+  id3[Dostosowanie interfejsu]
+  id4[Wyświetlenie opcji językowych]
+  id5[Powrót do języka domyślnego]
+
+  id11[Uruchomienie ekranu powitalnego]
+  id22[Pobranie listy biletów]
+  id33[Wyświetlenie biletów]
+  id44[Oczekiwanie na wybór użytkownika]
+  id55[Aktualizacja biletów]
+  id66[Ostrzeżenie o braku danych]
+
+  uc1[Gromadzenie danych o transakcji]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Oczekiwanie na decyzję użytkownika]
+  uc4[Obsługa anulowania]
+
+  u1[Potwierdzenie zakończenia transakcji]
+  u2[Generowanie potwierdzenia]
+  u3[Informacja o potwierdzeniu]
+  u4[Oczekiwanie na odbiór]
+  u5[Generowanie biletu]
+  u6[Błąd generowania]
+
+  A --> id1
+  A --> id2
+  A --> id3
+  id5-. extend .-> id1
+  id5-. extend .-> id2
+  id5-. extend .-> id3
+  id1-. include .-> id4
+
+  A --> id11
+  A --> id22
+  A --> id33
+  A --> id44
+  id22-. include .-> id55
+  id66-. extend .-> id22
+
+  A --> uc1
+  A --> uc2
+  A --> uc3
+
+  uc1-. include .-> uc2
+  uc4-. extend .-> uc3
+
+  A --> u1
+  A --> u2
+  A --> u3
+  A --> u4
+
+  u1-. include .-> u5
+  u6-. extend .-> u3
 ```
