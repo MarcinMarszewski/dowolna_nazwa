@@ -89,6 +89,37 @@ end
 
 ```
 
+## 2. "Wybór języka"
+
+```mermaid
+graph TD
+  DD@{ shape: manual-file, label: "System transakcyjny" }
+  DDD@{ shape: manual-file, label: "Użytkownik" }
+  u1[Wyświetlenie opcji językowych]
+  u2[Rejestracja wyboru języka]
+  u3[Dostosowanie interfejsu]
+  u4[Opcje językowe]
+  u5[Powrót do języka domyślnego]
+
+  DD --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> DDD
+
+  u1-. include .-> u4
+  u5-. extend .-> u2
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+end
+
+```
+
+
 ## 4. "Generowanie potwierdzenia zakupu"
 
 ```mermaid
