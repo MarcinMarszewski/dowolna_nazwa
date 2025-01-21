@@ -102,7 +102,6 @@ subgraph "Sprawdzenie poprawności transakcji"
 ```mermaid
 graph TD
   D@{ shape: manual-file, label: "Użytkownik" }
-  DD@{ shape: manual-file, label: "System transakcyjny" }
   u1[Generowanie potwierdzenia]
   u2[Odebranie potwierdzenia]
   u3[Komunikat o zakończeniu]
@@ -110,20 +109,16 @@ graph TD
   u5[Generowanie biletu]
   u6[Wybór formy potwierdzenia]
 
-  DD --> u1
+  D --> u1
   u1 --> u2
   u2 --> u3
-  u3 --> u4
-  u4 --> u5
 
-  u1-. include .-> u6
-  u2-. include .-> u6
-  u3-. include .-> u6
-  u4-. include .-> u6
-  u5-. include .-> u6
-  u3-. include .-> u7
-  u8-. extend .-> u2
-  u8-. extend .-> u3
+  u1-. include .-> u5
+  u1-. include .-> u4
+  u2-. include .-> u4
+  u3-. include .-> u4
+  u6-. extend .-> u1
+
 
 subgraph Biletomat
   u1
@@ -132,8 +127,6 @@ subgraph Biletomat
   u4
   u5
   u6
-  u7
-  u8
 end
 
 ```
