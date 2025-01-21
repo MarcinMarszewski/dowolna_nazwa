@@ -77,6 +77,7 @@ subgraph "Sprawdzenie poprawności transakcji"
   uc7-. extend .-> uc1
   
   end
+
   subgraph "Otrzymanie potwierdzenia zakupu"
   D@{ shape: manual-file, label: "Użytkownik" }
   u1[Generowanie potwierdzenia]
@@ -96,6 +97,39 @@ subgraph "Sprawdzenie poprawności transakcji"
   u6-. extend .-> u1
 
   end
+```
+
+```mermaid
+graph TD
+  US@{ shape: manual-file, label: "Użytkownik" }
+  uc1[Wybór biletu i płatności]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Potwierdzenie lub cofnięcie]
+  uc4[Kontynuacja lub anulowanie]
+  uc5[Anulowanie transakcji]
+  uc6[Ostrzeżenie o błędzie]
+  uc7[Podsumowanie transakcji]
+
+  US  --> uc1
+  uc1 --> uc2
+  uc2 --> uc3
+  uc3 --> uc4
+  US --> uc5
+
+  uc4 -. include .-> uc5
+  uc6 -. extend .-> uc2
+  uc2 -. include .-> uc7
+
+subgraph Biletomat
+  uc1
+  uc2
+  uc3
+  uc4
+  uc5
+  uc6
+  uc7
+end
+
 ```
 
 ### Wspólny diagram przypadków użycia
