@@ -114,6 +114,39 @@ end
 
 ```
 
+## 4. Otrzymanie potwierdzenia zakupu
+```mermaid
+graph TD
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Generowanie potwierdzenia]
+  u2[Odebranie potwierdzenia]
+  u3[Komunikat o zakończeniu]
+  u4[Anulowanie transakcji]
+  u5[Generowanie biletu]
+  u6[Wybór formy potwierdzenia]
+
+  D --> u1
+  u1 --> u2
+  u2 --> u3
+
+  u1-. include .-> u5
+  u1-. include .-> u4
+  u2-. include .-> u4
+  u3-. include .-> u4
+  u6-. extend .-> u1
+
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+end
+
+```
+
 ### Wspólny diagram przypadków użycia
 
 ```mermaid
