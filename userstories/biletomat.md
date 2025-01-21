@@ -61,6 +61,8 @@ subgraph "Wyświetlenie podsumowania transakcji"
 end
 subgraph "Generowanie potwierdzenia zakupu"
   D@{ shape: manual-file, label: "Biletomat" }
+  DD@{ shape: manual-file, label: "System transakcyjny" }
+  DDD@{ shape: manual-file, label: "Użytkownik" }
   u1[Potwierdzenie zakończenia transakcji]
   u2[Generowanie potwierdzenia]
   u3[Informacja o potwierdzeniu]
@@ -68,13 +70,19 @@ subgraph "Generowanie potwierdzenia zakupu"
   u5[Generowanie biletu]
   u6[Błąd generowania]
 
-  D --> u1
+  DD --> u1
+  D --> u5
   D --> u2
   D --> u3
   D --> u4
+  u1 --> D
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
+  u4 --> DDD
 
   u1-. include .-> u5
-  u6-. extend .-> u3
+  u6-. extend .-> u2
 
 end
 
