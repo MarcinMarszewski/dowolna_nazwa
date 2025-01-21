@@ -103,19 +103,75 @@ subgraph "Sprawdzenie poprawności transakcji"
 ```mermaid
 flowchart LR
   A@{ shape: manual-file, label: "Użytkownik" }
-  id1[Szybki wybór rodzaju biletu]
+  id1[Rozpoczęcie interakcji]
   id2[Sprawdzenie biletów]
   id3[Anulowanie transakcji]
-  id4[Podpowiedź interfejsu]
+  id4[Wyświetlenie podpowiedzi interfejsu]
+  id11[Wybranie kategorii]
+  id111[Wybranie biletu]
+  id1111[Potwierdzenie wyboru]
+
+  B@{ shape: manual-file, label: "Użytkownik" }
+  id5[Wybranie języka]
+  id6[Ustawienie domyślnego języka]
+  id8[Wyświetlenie listy popularnych języków]
+  id22[Rozpoczęcie interakcji]
+  id222[Wyświetlenie opcji języka]
+  id2222[Dostosowanie interfejsu]
+
+  C@{ shape: manual-file, label: "Użytkownik" }
+  uc1[Wybór biletu i płatności]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Potwierdzenie lub cofnięcie]
+  uc4[Kontynuacja lub anulowanie]
+  uc7[Ostrzeżenie o błędzie]
+
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Generowanie potwierdzenia]
+  u2[Odebranie potwierdzenia]
+  u3[Komunikat o zakończeniu]
+  u5[Generowanie biletu]
+  u6[Wybór formy potwierdzenia]
 
   A --> id1
-  id1-- include ---id2
-  id1-- include ---id3
-  id4-- extend ---id1
+  A --> id11
+  A --> id111
+  A --> id1111
+  id1-. include .-> id3
+  id11-. include .-> id3
+  id111-. include .-> id3
+  id1111-. include .-> id3
+  id111-. include .-> id2
+  id4-. extend .-> id11
+  id4-. extend .-> id111
+
   A --> id5;
-  id5[Wybór języka] --include--> id6;
-  id5 --include--> id3;
-  id8 --extend--> id5;
-  id6[Domyślny język];
-  id8[Lista popularnych języków];
+  A --> id22;
+  A --> id222;
+  A --> id2222;
+  id5-. include .-> id3
+  id22-. include .-> id3
+  id222-. include .-> id3
+  id2222-. include .-> id3
+  id2222-. include .-> id6
+  id8-. extend .-> id222
+
+  A --> uc1
+  A --> uc3
+  A --> uc4
+  uc1-. include .-> id3
+  uc2-. include .-> id3
+  uc3-. include .-> id3
+  uc4-. include .-> id3
+  uc1-. include .-> uc2
+  uc7-. extend .-> uc1
+
+  A --> u1
+  A --> u2
+  A --> u3
+  u1-. include .-> id3
+  u2-. include .-> id3
+  u3-. include .-> id3
+  u1-. include .-> u5
+  u6-. extend .-> u1
 ```
