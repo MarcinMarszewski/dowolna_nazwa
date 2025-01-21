@@ -57,26 +57,7 @@ subgraph "Wybór języka"
   id2222-. include .-> id6
   id8-. extend .-> id222
 end
-subgraph "Sprawdzenie poprawności transakcji"
-  C@{ shape: manual-file, label: "Użytkownik" }
-  uc1[Wybór biletu i płatności]
-  uc2[Wyświetlenie podsumowania]
-  uc3[Potwierdzenie lub cofnięcie]
-  uc4[Kontynuacja lub anulowanie]
-  uc5[Anulowanie transakcji]
-  uc7[Ostrzeżenie o błędzie]
 
-  C --> uc1
-  C --> uc3
-  C --> uc4
-  uc1-. include .-> uc5
-  uc2-. include .-> uc5
-  uc3-. include .-> uc5
-  uc4-. include .-> uc5
-  uc1-. include .-> uc2
-  uc7-. extend .-> uc1
-  
-  end
   subgraph "Otrzymanie potwierdzenia zakupu"
   D@{ shape: manual-file, label: "Użytkownik" }
   u1[Generowanie potwierdzenia]
@@ -96,6 +77,41 @@ subgraph "Sprawdzenie poprawności transakcji"
   u6-. extend .-> u1
 
   end
+```
+## 3. Sprawdzenie poprawności transakcji
+```mermaid
+graph TD
+  US@{ shape: manual-file, label: "Użytkownik" }
+  uc1[Wybór biletu i płatności]
+  uc2[Wyświetlenie podsumowania]
+  uc3[Potwierdzenie lub cofnięcie]
+  uc4[Kontynuacja lub anulowanie]
+  uc5[Anulowanie transakcji]
+  uc6[Ostrzeżenie o błędzie]
+  uc7[Podsumowanie transakcji]
+
+  US  --> uc1
+  uc1 --> uc2
+  uc2 --> uc3
+  uc3 --> uc4
+
+  uc1 -. include .-> uc5
+  uc2 -. include .-> uc5
+  uc3 -. include .-> uc5
+  uc4 -. include .-> uc5
+  uc6 -. extend .-> uc2
+  uc2 -. include .-> uc7
+
+subgraph System Transakcyjny
+  uc1
+  uc2
+  uc3
+  uc4
+  uc5
+  uc6
+  uc7
+end
+
 ```
 
 ### Wspólny diagram przypadków użycia
