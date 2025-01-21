@@ -27,37 +27,6 @@ subgraph "Wybór języka"
   id1-. include .-> id4
   
 end
-subgraph "Wyświetlenie dostępnych biletów"
-  B@{ shape: manual-file, label: "Biletomat" }
-  id11[Uruchomienie ekranu powitalnego]
-  id22[Pobranie listy biletów]
-  id33[Wyświetlenie biletów]
-  id44[Oczekiwanie na wybór użytkownika]
-  id55[Aktualizacja biletów]
-  id66[Ostrzeżenie o braku danych]
-
-  B --> id11
-  B --> id22
-  B --> id33
-  B --> id44
-  id22-. include .-> id55
-  id66-. extend .-> id22
-
-end
-subgraph "Wyświetlenie podsumowania transakcji"
-  C@{ shape: manual-file, label: "Biletomat" }
-  uc1[Gromadzenie danych o transakcji]
-  uc2[Wyświetlenie podsumowania]
-  uc3[Oczekiwanie na decyzję użytkownika]
-  uc4[Obsługa anulowania]
-
-  C --> uc1
-  C --> uc2
-  C --> uc3
-
-  uc1-. include .-> uc2
-  uc4-. extend .-> uc3
-end
 ```
 ## 1. "Wyświetlenie dostępnych biletów"
 ```mermaid
@@ -88,6 +57,36 @@ subgraph Biletomat
 end
 
 ```
+
+## 3. "Wyświetlenie podsumowania transakcji"
+```mermaid
+graph TD
+  DD@{ shape: manual-file, label: "System transakcyjny" }
+  DDD@{ shape: manual-file, label: "Użytkownik" }
+  u1[Gromadzenie danych i transakcji]
+  u2[Wyświetlenie podsumowania]
+  u3[Oczekiwanie na decyzję użytkownika]
+  u4[Podsumowanie transakcji]
+  u5[Obsługa anulowania]
+
+  DD --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> DDD
+
+  u2-. include .-> u4
+  u5-. extend .-> u3
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+end
+
+```
+
 
 ## 4. "Generowanie potwierdzenia zakupu"
 
