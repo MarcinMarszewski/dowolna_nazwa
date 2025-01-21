@@ -59,6 +59,36 @@ subgraph "Wyświetlenie podsumowania transakcji"
   uc4-. extend .-> uc3
 end
 ```
+## 1. "Wyświetlenie dostępnych biletów"
+```mermaid
+graph TD
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Uruchomienie ekranu powitalnego]
+  u2[Pobranie listy biletów]
+  u3[Wyświetlenie biletów]
+  u4[Oczekiwanie na wybór użytkownika]
+  u5[Aktualizacja biletów]
+  u6[Ostrzeżenie o braku danych]
+
+  D --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
+
+  u2-. include .-> u5
+  u6-. extend .-> u3
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+end
+
+```
+
 ## 4. "Generowanie potwierdzenia zakupu"
 ```mermaid
 graph TD
