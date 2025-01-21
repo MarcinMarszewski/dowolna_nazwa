@@ -111,7 +111,6 @@ flowchart LR
   id111[Wybranie biletu]
   id1111[Potwierdzenie wyboru]
 
-  B@{ shape: manual-file, label: "Użytkownik" }
   id5[Wybranie języka]
   id6[Ustawienie domyślnego języka]
   id8[Wyświetlenie listy popularnych języków]
@@ -119,14 +118,12 @@ flowchart LR
   id222[Wyświetlenie opcji języka]
   id2222[Dostosowanie interfejsu]
 
-  C@{ shape: manual-file, label: "Użytkownik" }
   uc1[Wybór biletu i płatności]
   uc2[Wyświetlenie podsumowania]
   uc3[Potwierdzenie lub cofnięcie]
   uc4[Kontynuacja lub anulowanie]
   uc7[Ostrzeżenie o błędzie]
 
-  D@{ shape: manual-file, label: "Użytkownik" }
   u1[Generowanie potwierdzenia]
   u2[Odebranie potwierdzenia]
   u3[Komunikat o zakończeniu]
