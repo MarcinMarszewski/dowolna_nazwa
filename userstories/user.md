@@ -98,6 +98,47 @@ subgraph "Sprawdzenie poprawności transakcji"
   end
 ```
 
+## 1. Szybki wybór rodzaju biletu
+```mermaid
+graph TD
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Rozpoczęcie interakcji]
+  u2[Wybór kategorii]
+  u3[Wybór biletu]
+  u4[Wyświetlenie podsumowania]
+  u5[Potwierdzenie wyboru]
+  u6[Anulowanie transakcji]
+  u7[Sprawdzenie biletów]
+  u8[Podpowiedź interfejsu]
+
+  D --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
+  u4 --> u5
+
+  u1-. include .-> u6
+  u2-. include .-> u6
+  u3-. include .-> u6
+  u4-. include .-> u6
+  u5-. include .-> u6
+  u3-. include .-> u7
+  u8-. extend .-> u2
+  u8-. extend .-> u3
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+  u7
+  u8
+end
+
+```
+
 ### Wspólny diagram przypadków użycia
 
 ```mermaid
