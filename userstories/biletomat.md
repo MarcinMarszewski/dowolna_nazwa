@@ -60,6 +60,7 @@ subgraph "Wyświetlenie podsumowania transakcji"
 end
 ```
 ## 4. "Generowanie potwierdzenia zakupu"
+
 ```mermaid
 graph TD
   DD@{ shape: manual-file, label: "System transakcyjny" }
