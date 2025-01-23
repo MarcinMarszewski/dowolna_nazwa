@@ -43,7 +43,6 @@ end
 
 ```mermaid
 graph TD
-  DD@{ shape: manual-file, label: "System transakcyjny" }
   DDD@{ shape: manual-file, label: "Użytkownik" }
 
   u1[Wyświetlenie opcji językowych]
@@ -52,10 +51,9 @@ graph TD
   u4[Wyświetlenie opcji językowych]
   u5[Powrót do języka domyślnego]
 
-  DD --> u1
+  DDD --> u1
   u1 --> u2
   u2 --> u3
-  u3 --> DDD
 
   u1-. include .-> u4
   u5-. extend .-> u2
@@ -74,7 +72,6 @@ end
 
 ```mermaid
 graph TD
-  DD@{ shape: manual-file, label: "System transakcyjny" }
   DDD@{ shape: manual-file, label: "Użytkownik" }
 
   u1[Gromadzenie danych i transakcji]
@@ -83,10 +80,9 @@ graph TD
   u4[Podsumowanie transakcji]
   u5[Obsługa anulowania]
 
-  DD --> u1
+  DDD --> u1
   u1 --> u2
   u2 --> u3
-  u3 --> DDD
 
   u2-. include .-> u4
   u5-. extend .-> u3
