@@ -77,7 +77,7 @@ graph TD
   uc6 -. extend .-> uc2
   uc2 -. include .-> uc7
 
-subgraph System Transakcyjny
+subgraph Biletomat
   uc1
   uc2
   uc3
@@ -114,7 +114,7 @@ graph TD
   uc6 -. extend .-> uc2
   uc2 -. include .-> uc7
 
-subgraph System Transakcyjny
+subgraph Biletomat
   uc1
   uc2
   uc3
@@ -232,4 +232,49 @@ flowchart LR
   u3-. include .-> id3
   u1-. include .-> u5
   u6-. extend .-> u1
+```
+
+# Diagramy sekwencji
+
+## Diagram sekwencji dla przypadku użycia wybrania języka
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu
+- Kolejność komunikatów:
+  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
+  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
+  4. Użytkownik wybiera preferowany język
+  5. System biletomatu dostosowuje interfejs do wybranego języka
+- Scenariusz alternatywny 1 (Lista popularnych języków)
+  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
+  2. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
+  3. Użytkownik wciska przycisk popularnych języków
+  4. Interfejs wyświetla listę popularnych języków
+  5. Użytkownik wybiera preferowany język
+  6. System biletomatu dostosowuje interfejs do wybranego języka
+ 
+## Wizualizacja diagramu sekwencji
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+
+  user->>ui: Rozpoczęcie interakcji
+  ui->>sys: Pobranie dostępnych języków
+  sys-->>ui: Dostępne języki
+  ui-->>user: Wyświetlenie ekranu powitalnego z opcjami wyboru języka
+
+  opt Popularne języki
+    user->>ui: Wybranie przycisku popularnych jezyków
+    ui-->>user: Wyświetlenie okna popularnych języków
+  end
+
+  user->>ui: Wybór języka
+  ui->>sys: Dostosowanie interfejsu do języka
+  sys-->>ui: return
+  ui-->>user: Wyświetlenie dostosowanego interfejsu
+
+  
 ```
