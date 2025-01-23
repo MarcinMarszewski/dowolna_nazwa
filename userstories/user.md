@@ -62,8 +62,8 @@ graph TD
   uc3[Wybór języka]
   uc4[Dostosowanie interfejsu]
   uc5[Anulowanie transakcji]
-  uc6[Domyślny język]
-  uc7[Lista popularnych języków]
+  uc6[Ustawienie domyślnego języka]
+  uc7[Wyświetlenie listy popularnych języków]
 
   US  --> uc1
   uc1 --> uc2
