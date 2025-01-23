@@ -1,4 +1,4 @@
-## User Stories
+# User Stories
 
 1. **Jako użytkownik**, chcę szybko wybrać rodzaj biletu, aby zminimalizować czas spędzony przy biletomacie.
 1. **Jako użytkownik**, chcę mieć możliwość wyboru języka, aby móc korzystać z biletomatu bez względu na znajomość języka lokalnego.
@@ -9,75 +9,87 @@
 3. **Jako użytkownik**, chcę widzieć czas pozostały na decyzję (np. wyświetlany 
 licznik czasu), aby móc szybko podjąć działanie.
 
-## Diagramy przypadków użycia
+# Diagramy przypadków użycia
 
+## 1. Szybki wybór rodzaju biletu
 ```mermaid
-flowchart LR
-subgraph "Szybki wybór rodzaju biletu"
-  A@{ shape: manual-file, label: "Użytkownik" }
-  id1[Rozpoczęcie interakcji]
-  id2[Sprawdzenie biletów]
-  id3[Anulowanie transakcji]
-  id4[Wyświetlenie podpowiedzi interfejsu]
-  id11[Wybranie kategorii]
-  id111[Wybranie biletu]
-  id1111[Potwierdzenie wyboru]
-
-  A --> id1
-  A --> id11
-  A --> id111
-  A --> id1111
-  id1-. include .-> id3
-  id11-. include .-> id3
-  id111-. include .-> id3
-  id1111-. include .-> id3
-  id111-. include .-> id2
-  id4-. extend .-> id11
-  id4-. extend .-> id111
-  
-end
-subgraph "Wybór języka"
-  B@{ shape: manual-file, label: "Użytkownik" }
-  id5[Wybranie języka]
-  id6[Ustawienie domyślnego języka]
-  id7[Anulowanie transakcji]
-  id8[Wyświetlenie listy popularnych języków]
-  id22[Rozpoczęcie interakcji]
-  id222[Wyświetlenie opcji języka]
-  id2222[Dostosowanie interfejsu]
-
-  B --> id5;
-  B --> id22;
-  B --> id222;
-  B --> id2222;
-  id5-. include .-> id7
-  id22-. include .-> id7
-  id222-. include .-> id7
-  id2222-. include .-> id7
-  id2222-. include .-> id6
-  id8-. extend .-> id222
-end
-
-  subgraph "Otrzymanie potwierdzenia zakupu"
+graph TD
   D@{ shape: manual-file, label: "Użytkownik" }
-  u1[Generowanie potwierdzenia]
-  u2[Odebranie potwierdzenia]
-  u3[Komunikat o zakończeniu]
-  u4[Anulowanie transakcji]
-  u5[Generowanie biletu]
-  u6[Wybór formy potwierdzenia]
+  u1[Rozpoczęcie interakcji]
+  u2[Wybór kategorii]
+  u3[Wybór biletu]
+  u4[Wyświetlenie podsumowania]
+  u5[Potwierdzenie wyboru]
+  u6[Anulowanie transakcji]
+  u7[Sprawdzenie biletów]
+  u8[Podpowiedź interfejsu]
 
   D --> u1
-  D --> u2
-  D --> u3
-  u1-. include .-> u4
-  u2-. include .-> u4
-  u3-. include .-> u4
-  u1-. include .-> u5
-  u6-. extend .-> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
+  u4 --> u5
 
-  end
+  u1-. include .-> u6
+  u2-. include .-> u6
+  u3-. include .-> u6
+  u4-. include .-> u6
+  u5-. include .-> u6
+  u3-. include .-> u7
+  u8-. extend .-> u2
+  u8-. extend .-> u3
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+  u7
+  u8
+end
+
 ```
+
+## 2. Wybór języka
+
+```mermaid
+graph TD
+  US@{ shape: manual-file, label: "Użytkownik" }
+  uc1[Rozpoczęcie interakcji]
+  uc2[Wyświetlenie opcji języka]
+  uc3[Wybór języka]
+  uc4[Dostosowanie interfejsu]
+  uc5[Anulowanie transakcji]
+  uc6[Domyślny język]
+  uc7[Lista popularnych języków]
+
+  US  --> uc1
+  uc1 --> uc2
+  uc2 --> uc3
+  uc3 --> uc4
+
+  uc1 -. include .-> uc5
+  uc2 -. include .-> uc5
+  uc3 -. include .-> uc5
+  uc4 -. include .-> uc5
+  uc6 -. extend .-> uc2
+  uc2 -. include .-> uc7
+
+subgraph System Transakcyjny
+  uc1
+  uc2
+  uc3
+  uc4
+  uc5
+  uc6
+  uc7
+end
+
+```
+
+
 ## 3. Sprawdzenie poprawności transakcji
 ```mermaid
 graph TD
@@ -143,47 +155,6 @@ subgraph Biletomat
   u4
   u5
   u6
-end
-
-```
-
-## 1. Szybki wybór rodzaju biletu
-```mermaid
-graph TD
-  D@{ shape: manual-file, label: "Użytkownik" }
-  u1[Rozpoczęcie interakcji]
-  u2[Wybór kategorii]
-  u3[Wybór biletu]
-  u4[Wyświetlenie podsumowania]
-  u5[Potwierdzenie wyboru]
-  u6[Anulowanie transakcji]
-  u7[Sprawdzenie biletów]
-  u8[Podpowiedź interfejsu]
-
-  D --> u1
-  u1 --> u2
-  u2 --> u3
-  u3 --> u4
-  u4 --> u5
-
-  u1-. include .-> u6
-  u2-. include .-> u6
-  u3-. include .-> u6
-  u4-. include .-> u6
-  u5-. include .-> u6
-  u3-. include .-> u7
-  u8-. extend .-> u2
-  u8-. extend .-> u3
-
-subgraph Biletomat
-  u1
-  u2
-  u3
-  u4
-  u5
-  u6
-  u7
-  u8
 end
 
 ```
