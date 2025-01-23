@@ -1,3 +1,5 @@
+# User Stories
+
 1. **Jako biletomat**, chcę automatycznie aktualizować listę dostępnych biletów i ich cen, aby zapewnić zgodność z polityką przewoźnika.
 1. **Jako biletomat**, chcę rejestrować wszystkie transakcje i wysyłać raporty do systemu centralnego, aby umożliwić monitoring i kontrolę operacji.
 1. **Jako biletomat**, chcę posiadać czytelny ekran dotykowy, aby użytkownik mógł 
@@ -6,7 +8,7 @@
 3. **Jako biletomat**, chcę wydawać resztę w gotówce, jeśli użytkownik zapłaci 
 nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 
-## Diagramy przypadków użycia
+# Diagramy przypadków użycia
 
 ## 1. "Wyświetlenie dostępnych biletów"
 ```mermaid
