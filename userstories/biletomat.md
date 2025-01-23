@@ -108,7 +108,7 @@ graph TD
   u3[Informacja o potwierdzeniu]
   u4[Oczekiwanie na odbiór]
   u5[Generowanie biletu]
-  u6[Błąd generowania]
+  u6[Powiadomienie o błędzie generowania]
 
   DD --> u1
   u1 --> u2
