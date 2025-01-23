@@ -6,59 +6,8 @@
 3. **Jako biletomat**, chcę wydawać resztę w gotówce, jeśli użytkownik zapłaci 
 nadmiarowo, aby transakcja była zgodna z oczekiwaniami.
 
-## Diagram przypadków użycia
+## Diagramy przypadków użycia
 
-```mermaid
-flowchart LR
-subgraph "Wybór języka"
-  A@{ shape: manual-file, label: "Biletomat" }
-  id1[Wyświetlenie opcji językowych]
-  id2[Rejestracja wyboru języka]
-  id3[Dostosowanie interfejsu]
-  id4[Wyświetlenie opcji językowych]
-  id5[Powrót do języka domyślnego]
-
-  A --> id1
-  A --> id2
-  A --> id3
-  id5-. extend .-> id1
-  id5-. extend .-> id2
-  id5-. extend .-> id3
-  id1-. include .-> id4
-  
-end
-subgraph "Wyświetlenie dostępnych biletów"
-  B@{ shape: manual-file, label: "Biletomat" }
-  id11[Uruchomienie ekranu powitalnego]
-  id22[Pobranie listy biletów]
-  id33[Wyświetlenie biletów]
-  id44[Oczekiwanie na wybór użytkownika]
-  id55[Aktualizacja biletów]
-  id66[Ostrzeżenie o braku danych]
-
-  B --> id11
-  B --> id22
-  B --> id33
-  B --> id44
-  id22-. include .-> id55
-  id66-. extend .-> id22
-
-end
-subgraph "Wyświetlenie podsumowania transakcji"
-  C@{ shape: manual-file, label: "Biletomat" }
-  uc1[Gromadzenie danych o transakcji]
-  uc2[Wyświetlenie podsumowania]
-  uc3[Oczekiwanie na decyzję użytkownika]
-  uc4[Obsługa anulowania]
-
-  C --> uc1
-  C --> uc2
-  C --> uc3
-
-  uc1-. include .-> uc2
-  uc4-. extend .-> uc3
-end
-```
 ## 1. "Wyświetlenie dostępnych biletów"
 ```mermaid
 graph TD
@@ -91,20 +40,20 @@ end
 
 ## 2. "Wybór języka"
 
+
 ```mermaid
 graph TD
-  DD@{ shape: manual-file, label: "System transakcyjny" }
   DDD@{ shape: manual-file, label: "Użytkownik" }
+
   u1[Wyświetlenie opcji językowych]
   u2[Rejestracja wyboru języka]
   u3[Dostosowanie interfejsu]
-  u4[Opcje językowe]
+  u4[Wyświetlenie opcji językowych]
   u5[Powrót do języka domyślnego]
 
-  DD --> u1
+  DDD --> u1
   u1 --> u2
   u2 --> u3
-  u3 --> DDD
 
   u1-. include .-> u4
   u5-. extend .-> u2
@@ -119,6 +68,34 @@ end
 
 ```
 
+## 3. "Wyświetlenie podsumowania transakcji"
+
+```mermaid
+graph TD
+  DDD@{ shape: manual-file, label: "Użytkownik" }
+
+  u1[Gromadzenie danych i transakcji]
+  u2[Wyświetlenie podsumowania]
+  u3[Oczekiwanie na decyzję użytkownika]
+  u4[Podsumowanie transakcji]
+  u5[Obsługa anulowania]
+
+  DDD --> u1
+  u1 --> u2
+  u2 --> u3
+
+  u2-. include .-> u4
+  u5-. extend .-> u3
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+end
+
+```
 
 ## 4. "Generowanie potwierdzenia zakupu"
 
