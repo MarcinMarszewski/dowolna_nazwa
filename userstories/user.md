@@ -282,3 +282,58 @@ sequenceDiagram
 
   
 ```
+
+## Diagram sekwencji dla przypadku użycia Otrzymanie potwierdzenia zakupu
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu
+- Kolejność komunikatów:
+  1. Użytkownik kończy transakcję
+  1. System generuje potwierdzenie
+  2. Interfejs wyświetla okno wyboru rodzaju potwierdzenia
+  3. Użytkownik wybiera potwierdzenie elektroniczne
+  4. Interfejs wysyła informację o potwierdzeniu elektronicznym
+  5. System wysyła potwierdzenie elektroniczne użytkownikowi
+  6. Interfejs wyświetla informację o zakończeniu procesu
+- Scenariusz alternatywny 1 (Wybór potwierdzenia drukowanego)
+  1. Użytkownik kończy transakcję
+  1. System generuje potwierdzenie
+  2. Interfejs wyświetla okno wyboru rodzaju potwierdzenia
+  3. Użytkownik wybiera potwierdzenie drukowane
+  4. Interfejs wysyła informację o potwierdzeniu drukowanym
+  5. System wysyła potwierdzenie do intefejsu
+  6. Interfejs drukuje potwierdzenie
+  7. Użytkownik odbiera potiwerdzenie
+  8. Interfejs wyświetla informację o zakończeniu procesu
+
+## Wizualizacja diagramu sekwencji
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+
+  user->>ui: Zakończenie transakcji
+  ui->>sys: Zakończenie transakcji
+  sys-->>ui: return
+  ui->>user: Okno wyboru rodzaju potwierdzenia
+
+  user-->>ui: Wybrany rodzaj potwierdzenia
+
+  alt Potwierdzenie Elektroniczne
+    ui->>sys: Żądanie potwierdzenia elektronicznego
+    sys->>sys: Wysłanie potwierdzenia elektronicznego
+    sys-->>ui: return
+  else Potwierdzenie Drukowane
+    ui->>sys: Pobranie potwierdzenia do druku
+    sys-->>ui: Potwierdzenie
+    ui->>user: Wydrukowanie potwierdzenie
+    user-->>ui: Odebranie potwierdzenia
+  end
+
+  ui->>user: Wyświetlenie informacji o zakończeniu procesu
+  user-->>ui: return
+  ui-->>user: return
+  
+```
