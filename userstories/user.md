@@ -162,76 +162,117 @@ end
 ### Wspólny diagram przypadków użycia
 
 ```mermaid
-flowchart LR
-  A@{ shape: manual-file, label: "Użytkownik" }
-  id1[Rozpoczęcie interakcji]
-  id2[Sprawdzenie biletów]
-  id3[Anulowanie transakcji]
-  id4[Wyświetlenie podpowiedzi interfejsu]
-  id11[Wybranie kategorii]
-  id111[Wybranie biletu]
-  id1111[Potwierdzenie wyboru]
+graph TD
 
-  id5[Wybranie języka]
-  id6[Ustawienie domyślnego języka]
-  id8[Wyświetlenie listy popularnych języków]
-  id22[Rozpoczęcie interakcji]
-  id222[Wyświetlenie opcji języka]
-  id2222[Dostosowanie interfejsu]
+D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Rozpoczęcie interakcji]
+  u2[Wybór kategorii]
+  u3[Wybór biletu]
+  u4[Wyświetlenie podsumowania]
+  u5[Potwierdzenie wyboru]
+  u6[Anulowanie transakcji]
+  u7[Sprawdzenie biletów]
+  u8[Podpowiedź interfejsu]
 
-  uc1[Wybór biletu i płatności]
-  uc2[Wyświetlenie podsumowania]
-  uc3[Potwierdzenie lub cofnięcie]
-  uc4[Kontynuacja lub anulowanie]
-  uc7[Ostrzeżenie o błędzie]
+  D --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
+  u4 --> u5
 
-  u1[Generowanie potwierdzenia]
-  u2[Odebranie potwierdzenia]
-  u3[Komunikat o zakończeniu]
-  u5[Generowanie biletu]
-  u6[Wybór formy potwierdzenia]
+  u1-. include .-> u6
+  u2-. include .-> u6
+  u3-. include .-> u6
+  u4-. include .-> u6
+  u5-. include .-> u6
+  u3-. include .-> u7
+  u8-. extend .-> u2
+  u8-. extend .-> u3
 
-  A --> id1
-  A --> id11
-  A --> id111
-  A --> id1111
-  id1-. include .-> id3
-  id11-. include .-> id3
-  id111-. include .-> id3
-  id1111-. include .-> id3
-  id111-. include .-> id2
-  id4-. extend .-> id11
-  id4-. extend .-> id111
+  uc1[Rozpoczęcie interakcji]
+  uc2[Wyświetlenie opcji języka]
+  uc3[Wybór języka]
+  uc4[Dostosowanie interfejsu]
+  uc6[Ustawienie domyślnego języka]
+  uc7[Wyświetlenie listy popularnych języków]
 
-  A --> id5;
-  A --> id22;
-  A --> id222;
-  A --> id2222;
-  id5-. include .-> id3
-  id22-. include .-> id3
-  id222-. include .-> id3
-  id2222-. include .-> id3
-  id2222-. include .-> id6
-  id8-. extend .-> id222
+  D  --> uc1
+  uc1 --> uc2
+  uc2 --> uc3
+  uc3 --> uc4
 
-  A --> uc1
-  A --> uc3
-  A --> uc4
-  uc1-. include .-> id3
-  uc2-. include .-> id3
-  uc3-. include .-> id3
-  uc4-. include .-> id3
-  uc1-. include .-> uc2
-  uc7-. extend .-> uc1
+  uc1 -. include .-> u6
+  uc2 -. include .-> u6
+  uc3 -. include .-> u6
+  uc4 -. include .-> u6
+  uc6 -. extend .-> uc2
+  uc2 -. include .-> uc7
 
-  A --> u1
-  A --> u2
-  A --> u3
-  u1-. include .-> id3
-  u2-. include .-> id3
-  u3-. include .-> id3
-  u1-. include .-> u5
-  u6-. extend .-> u1
+  w1[Wybór biletu i płatności]
+  w2[Wyświetlenie podsumowania]
+  w3[Potwierdzenie lub cofnięcie]
+  w4[Kontynuacja lub anulowanie]
+  w6[Ostrzeżenie o błędzie]
+  w7[Podsumowanie transakcji]
+
+  D  --> w1
+  w1 --> w2
+  w2 --> w3
+  w3 --> w4
+
+  w1 -. include .-> u6
+  w2 -. include .-> u6
+  w3 -. include .-> u6
+  w4 -. include .-> u6
+  w6 -. extend .-> w2
+  w2 -. include .-> w7
+
+  x1[Generowanie potwierdzenia]
+  x2[Odebranie potwierdzenia]
+  x3[Komunikat o zakończeniu]
+  x5[Generowanie biletu]
+  x6[Wybór formy potwierdzenia]
+
+  D --> x1
+  x1 --> x2
+  x2 --> x3
+
+  x1-. include .-> x5
+  x1-. include .-> u6
+  x2-. include .-> u6
+  x3-. include .-> u6
+  x6-. extend .-> x1
+
+  subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+  u7
+  u8
+
+  uc1
+  uc2
+  uc3
+  uc4
+  uc6
+  uc7
+
+  w1
+  w2
+  w3
+  w4
+  w6
+  w7
+
+  x1
+  x2
+  x3
+  x5
+  x6
+  end
 ```
 
 # Diagramy sekwencji
