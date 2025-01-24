@@ -77,7 +77,7 @@ graph TD
   uc6 -. extend .-> uc2
   uc2 -. include .-> uc7
 
-subgraph System Transakcyjny
+subgraph Biletomat
   uc1
   uc2
   uc3
@@ -94,6 +94,7 @@ end
 ```mermaid
 graph TD
   US@{ shape: manual-file, label: "Użytkownik" }
+  TS@{ shape: manual-file, label: "System transakcyjny" }
   uc1[Wybór biletu i płatności]
   uc2[Wyświetlenie podsumowania]
   uc3[Potwierdzenie lub cofnięcie]
@@ -106,6 +107,7 @@ graph TD
   uc1 --> uc2
   uc2 --> uc3
   uc3 --> uc4
+  uc4 --> TS
 
   uc1 -. include .-> uc5
   uc2 -. include .-> uc5
@@ -114,7 +116,7 @@ graph TD
   uc6 -. extend .-> uc2
   uc2 -. include .-> uc7
 
-subgraph System Transakcyjny
+subgraph Biletomat
   uc1
   uc2
   uc3
@@ -232,4 +234,76 @@ flowchart LR
   u3-. include .-> id3
   u1-. include .-> u5
   u6-. extend .-> u1
+```
+
+# Diagramy sekwencji
+
+## Diagram sekwencji dla przypadku użycia sprawdzenia poprawności transakcji
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu, System transakcyjny
+- Kolejność komunikatów:
+  1. Użytkownik wybiera bilety i metodę płatności
+  2. System biletomatu weryfikuje poprawność wyboru
+  4. Interfejs biletomatu wyświetla podsumowanie transakcji
+  5. Użytkownik sprawdza szczegóły i potwierdza wybór
+  6. System biletomatu zapisuje dane transakcji
+  7. System transakcyjny dokonuje transakcji
+- Scenariusz alternatywny 1 (Niepoprawny wybór)
+  1. Użytkownik wybiera bilety i metodę płatności
+  2. System biletomatu wykrywa niepoprawny wybór
+  4. Interfejs biletomatu wyświetla ostrzeżenie o błędnym wyborze
+  5. Użytkownik poprawia wybór
+  2. System biletomatu weryfikuje poprawność wyboru
+  4. Interfejs biletomatu wyświetla podsumowanie transakcji
+  5. Użytkownik sprawdza szczegóły i potwierdza wybór
+  6. System biletomatu zapisuje dane transakcji
+  7. System transakcyjny dokonuje transakcji
+  8. Interfejst biletomatu wyświetla ekran pożegnania
+- Scenariusz alternatywny 2 (Cofnięcie wyboru)
+  1. Użytkownik wybiera bilety i metodę płatności
+  2. System biletomatu weryfikuje poprawność wyboru
+  4. Interfejs biletomatu wyświetla podsumowanie transakcji
+  5. Użytkownik sprawdza szczegóły i cofa wybór
+  6. Interfejs biletomatu wyświetla ekran wyboru biletów i metody płatności
+ 
+
+ 
+## Wizualizacja diagramu sekwencji
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+  participant tsys as System transakcyjny
+
+  user->>ui: Wybór biletów i metody płatności
+  ui->>sys: Sprawdzenie poprawności wyboru
+  sys-->>ui: Wynik sprawdzenia
+
+  LOOP Dopóki wybór niepoprawny
+    ui->>user: Wyświetlenie ostrzeżenia o błędnym wyborze
+    user-->>ui: Poprawienie wyboru
+    ui->>sys: Sprawdzenie poprawności wyboru
+    sys-->>ui: Wynik sprawdzenia
+  END
+
+  ui-->>user: Wyświetlenie podsumowania transakcji
+
+
+
+  ALT Potwierdzenie wyboru
+    user->>ui: Potwierdzenie wyboru
+    ui->>sys: Zapisanie danych
+    sys->>tsys: Wykonanie transakcji
+    tsys-->>sys: return
+    sys-->>ui: return
+    ui-->>user: Wyświetlenie ekranu pożegnania
+  ELSE Cofnięcie wyboru
+    user->>ui: Cofnięcie wyboru
+    ui-->>user: Wyświetlenie ekranu wyboru biletów i metody płątności
+  END
+
+  
 ```
