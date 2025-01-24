@@ -302,7 +302,7 @@ sequenceDiagram
     ui-->>user: Wyświetlenie ekranu pożegnania
   ELSE Cofnięcie wyboru
     user->>ui: Cofnięcie wyboru
-    ui-->>user: Wyświetlenie ekranu wyboru biletów i metody płątności
+    ui-->>user: Wyświetlenie ekranu wyboru biletów i metody płatności
   END
 
   
