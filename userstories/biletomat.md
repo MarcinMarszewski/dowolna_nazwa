@@ -131,63 +131,100 @@ subgraph Biletomat
 end
 
 ```
-## Wspólny diagram
+# Wspólny diagram przypadków użycia
 
 ```mermaid
-flowchart LR
-  A@{ shape: manual-file, label: "Biletomat" }
-  id1[Wyświetlenie opcji językowych]
-  id2[Rejestracja wyboru języka]
-  id3[Dostosowanie interfejsu]
-  id4[Wyświetlenie opcji językowych]
-  id5[Powrót do języka domyślnego]
+graph TD
+  D@{ shape: manual-file, label: "Użytkownik" }
+  u1[Uruchomienie ekranu powitalnego]
+  u2[Pobranie listy biletów]
+  u3[Wyświetlenie biletów]
+  u4[Oczekiwanie na wybór użytkownika]
+  u5[Aktualizacja biletów]
+  u6[Ostrzeżenie o braku danych]
 
-  id11[Uruchomienie ekranu powitalnego]
-  id22[Pobranie listy biletów]
-  id33[Wyświetlenie biletów]
-  id44[Oczekiwanie na wybór użytkownika]
-  id55[Aktualizacja biletów]
-  id66[Ostrzeżenie o braku danych]
+  D --> u1
+  u1 --> u2
+  u2 --> u3
+  u3 --> u4
 
-  uc1[Gromadzenie danych o transakcji]
-  uc2[Wyświetlenie podsumowania]
-  uc3[Oczekiwanie na decyzję użytkownika]
-  uc4[Obsługa anulowania]
-
-  u1[Potwierdzenie zakończenia transakcji]
-  u2[Generowanie potwierdzenia]
-  u3[Informacja o potwierdzeniu]
-  u4[Oczekiwanie na odbiór]
-  u5[Generowanie biletu]
-  u6[Błąd generowania]
-
-  A --> id1
-  A --> id2
-  A --> id3
-  id5-. extend .-> id1
-  id5-. extend .-> id2
-  id5-. extend .-> id3
-  id1-. include .-> id4
-
-  A --> id11
-  A --> id22
-  A --> id33
-  A --> id44
-  id22-. include .-> id55
-  id66-. extend .-> id22
-
-  A --> uc1
-  A --> uc2
-  A --> uc3
-
-  uc1-. include .-> uc2
-  uc4-. extend .-> uc3
-
-  A --> u1
-  A --> u2
-  A --> u3
-  A --> u4
-
-  u1-. include .-> u5
+  u2-. include .-> u5
   u6-. extend .-> u3
+
+  x1[Wyświetlenie opcji językowych]
+  x2[Rejestracja wyboru języka]
+  x3[Dostosowanie interfejsu]
+  x4[Wyświetlenie opcji językowych]
+  x5[Powrót do języka domyślnego]
+
+  D --> x1
+  x1 --> x2
+  x2 --> x3
+
+  x1-. include .-> x4
+  x5-. extend .-> x2
+
+  y1[Gromadzenie danych i transakcji]
+  y2[Wyświetlenie podsumowania]
+  y3[Oczekiwanie na decyzję użytkownika]
+  y4[Podsumowanie transakcji]
+  y5[Obsługa anulowania]
+
+  D --> y1
+  y1 --> y2
+  y2 --> y3
+
+  y2-. include .-> y4
+  y5-. extend .-> y3
+
+  DD@{ shape: manual-file, label: "System transakcyjny" }
+  z1[Potwierdzenie zakończenia transakcji]
+  z2[Generowanie potwierdzenia]
+  z3[Informacja o potwierdzeniu]
+  z4[Oczekiwanie na odbiór]
+  z5[Generowanie biletu]
+  z6[Powiadomienie o błędzie generowania]
+
+  DD --> z1
+  z1 --> z2
+  z2 --> z3
+  z3 --> z4
+  z4 --> D
+
+  z1-. include .-> z5
+  z6-. extend .-> z2
+
+
+subgraph Biletomat
+  u1
+  u2
+  u3
+  u4
+  u5
+  u6
+
+  x1
+  x2
+  x3
+  x4
+  x5
+
+  y1
+  y2
+  y3
+  y4
+  y5
+
+  z1
+  z2
+  z3
+  z4
+  z5
+  z6
+end
+
+
+
+  
+
 ```
