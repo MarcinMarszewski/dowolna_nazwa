@@ -242,16 +242,20 @@ flowchart LR
 - Obiekty: Interfejs biletomatu, System biletomatu
 - Kolejność komunikatów:
   1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
+  2. Interfejs biletomatu pobiera dostępne języki z systemu
   3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
   4. Użytkownik wybiera preferowany język
   5. System biletomatu dostosowuje interfejs do wybranego języka
+  6. Interfejs biletomatu wyświetla dostosowany interfejs
 - Scenariusz alternatywny 1 (Lista popularnych języków)
   1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
-  2. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
-  3. Użytkownik wciska przycisk popularnych języków
-  4. Interfejs wyświetla listę popularnych języków
-  5. Użytkownik wybiera preferowany język
-  6. System biletomatu dostosowuje interfejs do wybranego języka
+  2. Interfejs biletomatu pobiera dostępne języki z systemu
+  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
+  4. Użytkownik wciska przycisk popularnych języków
+  5. Interfejs wyświetla listę popularnych języków
+  6. Użytkownik wybiera preferowany język
+  7. System biletomatu dostosowuje interfejs do wybranego języka
+  8. Interfejs biletomatu wyświetla dostosowany interfejs
  
 ## Wizualizacja diagramu sekwencji
 
