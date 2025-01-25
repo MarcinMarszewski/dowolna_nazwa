@@ -316,6 +316,7 @@ sequenceDiagram
 
   user->>ui: Zakończenie transakcji
   ui->>sys: Zakończenie transakcji
+  sys->>sys: Generowanie potwierdzenia
   sys-->>ui: return
   ui->>user: Okno wyboru rodzaju potwierdzenia
 
