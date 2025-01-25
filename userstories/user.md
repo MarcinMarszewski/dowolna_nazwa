@@ -326,7 +326,79 @@ sequenceDiagram
   
 ```
 
-# Diagramy sekwencji
+## Diagram sekwencji dla przypadku użycia Szybki wybór rodzaju biletu
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu, System transakcyjny
+- Kolejność komunikatów:
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  4. Użytkownik wybiera bilet
+  5. Interfejs wyświetla podsumowanie
+  6. Użytkownik potwierdza wybór
+- Scenariusz alternatywny 1 (Cofnięcie  wyboru)
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  4. Użytkownik wybiera bilet
+  5. Interfejs wyświetla podsumowanie
+  6. Użytkownik anuluje wybór
+  7. Interfejs wyświetla ekran główny
+- Scenariusz alternatywny 2 (Długie oczekiwanie)
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  3. Użytkownik długo oczekuje
+  4. Interfejs wyświetla podpowiedź
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  3. Użytkownik długo oczekuje
+  4. Interfejs wyświetla podpowiedź
+  5. Użytkownik wybiera bilet
+  6. Interfejs wyświetla podsumowanie
+  7. Użytkownik potwierdza wybór
+
+## Wizualizacja diagramu sekwencji
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+
+  user->>ui: Rozpoczęcie kupna biletu
+  ui->>user: Wyświetlenie okna wyboru kategorii
+
+  OPT Użytkownik długo wybiera
+    ui-Xuser: Wyświetlenie podpowiedzi
+  END
+  user-->>ui: Wybranie kategorii
+  ui->>sys: Pobranie dostępnych biletów
+  sys-->>ui: Dostępne bilety
+
+  ui->>user: Wyświetlenie okna wyboru biletu
+  
+  OPT Użytkownik długo wybiera
+    ui-Xuser: Wyświetlenie podpowiedzi
+  END
+
+  user-->>ui: Wybranie biletu
+  ui->>user: Wyświetlenie podumowania
+  user-->>ui: Wybranie opcji
+
+  ALT Potwierdzenie wyboru
+    ui->>sys: Realizacja tranzakcji
+    sys-->>ui: return
+    ui-->>user: return
+  ELSE Cofnięcie wyboru
+    ui-->>user: Zakończenie kupna biletu
+  END
+```
 
 ## Diagram sekwencji dla przypadku użycia sprawdzenia poprawności transakcji
 
