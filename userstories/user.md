@@ -373,21 +373,23 @@ sequenceDiagram
 
   user->>ui: Rozpoczęcie kupna biletu
   ui->>user: Wyświetlenie okna wyboru kategorii
+  user-->>ui: Kategoria lub minięcie czasu
 
   OPT Użytkownik długo wybiera
-    ui-Xuser: Wyświetlenie podpowiedzi
+    ui->>user: Wyświetlenie podpowiedzi
+    user-->>ui: Kategoria
   END
-  user-->>ui: Wybranie kategorii
   ui->>sys: Pobranie dostępnych biletów
   sys-->>ui: Dostępne bilety
 
   ui->>user: Wyświetlenie okna wyboru biletu
-  
+  user-->>ui: Bilet lub minięcie czasu
+
   OPT Użytkownik długo wybiera
-    ui-Xuser: Wyświetlenie podpowiedzi
+    ui->>user: Wyświetlenie podpowiedzi
+    user-->>ui: Bilet
   END
 
-  user-->>ui: Wybranie biletu
   ui->>user: Wyświetlenie podsumowania
   user-->>ui: Wybranie opcji
 
