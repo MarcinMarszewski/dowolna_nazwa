@@ -279,6 +279,80 @@ D@{ shape: manual-file, label: "Użytkownik" }
 
 # Diagramy sekwencji
 
+## Diagram sekwencji dla przypadku użycia Szybki wybór rodzaju biletu
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu, System transakcyjny
+- Kolejność komunikatów:
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  4. Użytkownik wybiera bilet
+  5. Interfejs wyświetla podsumowanie
+  6. Użytkownik potwierdza wybór
+- Scenariusz alternatywny 1 (Cofnięcie  wyboru)
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  4. Użytkownik wybiera bilet
+  5. Interfejs wyświetla podsumowanie
+  6. Użytkownik anuluje wybór
+  7. Interfejs wyświetla ekran główny
+- Scenariusz alternatywny 2 (Długie oczekiwanie)
+  1. Użytkownik klika w dowolne miejsce w biletomacie
+  2. Interfejs wyświetla okno wyboru kategorii biletu
+  3. Użytkownik długo oczekuje
+  4. Interfejs wyświetla podpowiedź
+  1. Użytkownik wybiera kategorię biletu
+  2. Interfejs pobiera listę dostępnych biletów
+  3. Interfejs wyświetla listę biletów
+  3. Użytkownik długo oczekuje
+  4. Interfejs wyświetla podpowiedź
+  5. Użytkownik wybiera bilet
+  6. Interfejs wyświetla podsumowanie
+  7. Użytkownik potwierdza wybór
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+
+  user->>ui: Rozpoczęcie kupna biletu
+  ui->>user: Wyświetlenie okna wyboru kategorii
+  user-->>ui: Kategoria lub minięcie czasu
+
+  OPT Użytkownik długo wybiera
+    ui->>user: Wyświetlenie podpowiedzi
+    user-->>ui: Kategoria
+  END
+  ui->>sys: Pobranie dostępnych biletów
+  sys-->>ui: Dostępne bilety
+
+  ui->>user: Wyświetlenie okna wyboru biletu
+  user-->>ui: Bilet lub minięcie czasu
+
+  OPT Użytkownik długo wybiera
+    ui->>user: Wyświetlenie podpowiedzi
+    user-->>ui: Bilet
+  END
+
+  ui->>user: Wyświetlenie podsumowania
+  user-->>ui: Wybranie opcji
+
+  ALT Potwierdzenie wyboru
+    ui->>sys: Realizacja tranzakcji
+    sys-->>ui: return
+    ui-->>user: return
+  ELSE Cofnięcie wyboru
+    ui-->>user: Zakończenie kupna biletu
+  END
+```
+
 ## Diagram sekwencji dla przypadku użycia wybrania języka
 
 - Aktor: Użytkownik
@@ -299,8 +373,6 @@ D@{ shape: manual-file, label: "Użytkownik" }
   6. Użytkownik wybiera preferowany język
   7. System biletomatu dostosowuje interfejs do wybranego języka
   8. Interfejs biletomatu wyświetla dostosowany interfejs
- 
-## Wizualizacja diagramu sekwencji
 
 ```mermaid
 sequenceDiagram
@@ -354,8 +426,6 @@ sequenceDiagram
   4. Interfejs biletomatu wyświetla podsumowanie transakcji
   5. Użytkownik sprawdza szczegóły i cofa wybór
   6. Interfejs biletomatu wyświetla ekran wyboru biletów i metody płatności
-
-## Wizualizacja diagramu sekwencji
 
 ```mermaid
 sequenceDiagram
