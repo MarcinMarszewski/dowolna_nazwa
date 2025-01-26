@@ -388,7 +388,7 @@ sequenceDiagram
   END
 
   user-->>ui: Wybranie biletu
-  ui->>user: Wyświetlenie podumowania
+  ui->>user: Wyświetlenie podsumowania
   user-->>ui: Wybranie opcji
 
   ALT Potwierdzenie wyboru
