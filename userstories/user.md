@@ -279,53 +279,6 @@ D@{ shape: manual-file, label: "Użytkownik" }
 
 # Diagramy sekwencji
 
-## Diagram sekwencji dla przypadku użycia wybrania języka
-
-- Aktor: Użytkownik
-- Obiekty: Interfejs biletomatu, System biletomatu
-- Kolejność komunikatów:
-  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
-  2. Interfejs biletomatu pobiera dostępne języki z systemu
-  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
-  4. Użytkownik wybiera preferowany język
-  5. System biletomatu dostosowuje interfejs do wybranego języka
-  6. Interfejs biletomatu wyświetla dostosowany interfejs
-- Scenariusz alternatywny 1 (Lista popularnych języków)
-  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
-  2. Interfejs biletomatu pobiera dostępne języki z systemu
-  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
-  4. Użytkownik wciska przycisk popularnych języków
-  5. Interfejs wyświetla listę popularnych języków
-  6. Użytkownik wybiera preferowany język
-  7. System biletomatu dostosowuje interfejs do wybranego języka
-  8. Interfejs biletomatu wyświetla dostosowany interfejs
- 
-## Wizualizacja diagramu sekwencji
-
-```mermaid
-sequenceDiagram
-  actor user as Użytkownik
-  participant ui as Interfejs biletomatu
-  participant sys as System biletomatu
-
-  user->>ui: Rozpoczęcie interakcji
-  ui->>sys: Pobranie dostępnych języków
-  sys-->>ui: Dostępne języki
-  ui-->>user: Wyświetlenie ekranu powitalnego z opcjami wyboru języka
-
-  opt Popularne języki
-    user->>ui: Wybranie przycisku popularnych jezyków
-    ui-->>user: Wyświetlenie okna popularnych języków
-  end
-
-  user->>ui: Wybór języka
-  ui->>sys: Dostosowanie interfejsu do języka
-  sys-->>ui: return
-  ui-->>user: Wyświetlenie dostosowanego interfejsu
-
-  
-```
-
 ## Diagram sekwencji dla przypadku użycia Szybki wybór rodzaju biletu
 
 - Aktor: Użytkownik
@@ -362,8 +315,6 @@ sequenceDiagram
   5. Użytkownik wybiera bilet
   6. Interfejs wyświetla podsumowanie
   7. Użytkownik potwierdza wybór
-
-## Wizualizacja diagramu sekwencji
 
 ```mermaid
 sequenceDiagram
@@ -402,6 +353,51 @@ sequenceDiagram
   END
 ```
 
+## Diagram sekwencji dla przypadku użycia wybrania języka
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu
+- Kolejność komunikatów:
+  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
+  2. Interfejs biletomatu pobiera dostępne języki z systemu
+  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
+  4. Użytkownik wybiera preferowany język
+  5. System biletomatu dostosowuje interfejs do wybranego języka
+  6. Interfejs biletomatu wyświetla dostosowany interfejs
+- Scenariusz alternatywny 1 (Lista popularnych języków)
+  1. Użytkownik klika w dowolne miejsce na interfejsie biletomatu
+  2. Interfejs biletomatu pobiera dostępne języki z systemu
+  3. Interfejs biletomatu wyświetla ekran powitalny z opcjami wyboru języka
+  4. Użytkownik wciska przycisk popularnych języków
+  5. Interfejs wyświetla listę popularnych języków
+  6. Użytkownik wybiera preferowany język
+  7. System biletomatu dostosowuje interfejs do wybranego języka
+  8. Interfejs biletomatu wyświetla dostosowany interfejs
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+
+  user->>ui: Rozpoczęcie interakcji
+  ui->>sys: Pobranie dostępnych języków
+  sys-->>ui: Dostępne języki
+  ui-->>user: Wyświetlenie ekranu powitalnego z opcjami wyboru języka
+
+  opt Popularne języki
+    user->>ui: Wybranie przycisku popularnych jezyków
+    ui-->>user: Wyświetlenie okna popularnych języków
+  end
+
+  user->>ui: Wybór języka
+  ui->>sys: Dostosowanie interfejsu do języka
+  sys-->>ui: return
+  ui-->>user: Wyświetlenie dostosowanego interfejsu
+
+  
+```
+
 ## Diagram sekwencji dla przypadku użycia sprawdzenia poprawności transakcji
 
 - Aktor: Użytkownik
@@ -430,10 +426,6 @@ sequenceDiagram
   4. Interfejs biletomatu wyświetla podsumowanie transakcji
   5. Użytkownik sprawdza szczegóły i cofa wybór
   6. Interfejs biletomatu wyświetla ekran wyboru biletów i metody płatności
- 
-
- 
-## Wizualizacja diagramu sekwencji
 
 ```mermaid
 sequenceDiagram
@@ -468,6 +460,56 @@ sequenceDiagram
     user->>ui: Cofnięcie wyboru
     ui-->>user: Wyświetlenie ekranu wyboru biletów i metody płatności
   END
+```
 
-  
+## Diagram sekwencji dla przypadku użycia Otrzymanie potwierdzenia zakupu
+
+- Aktor: Użytkownik
+- Obiekty: Interfejs biletomatu, System biletomatu
+- Kolejność komunikatów:
+  1. Użytkownik kończy transakcję
+  1. System generuje potwierdzenie
+  2. Interfejs wyświetla okno wyboru rodzaju potwierdzenia
+  3. Użytkownik wybiera potwierdzenie elektroniczne
+  4. Interfejs wysyła informację o potwierdzeniu elektronicznym
+  5. System wysyła potwierdzenie elektroniczne użytkownikowi
+  6. Interfejs wyświetla informację o zakończeniu procesu
+- Scenariusz alternatywny 1 (Wybór potwierdzenia drukowanego)
+  1. Użytkownik kończy transakcję
+  1. System generuje potwierdzenie
+  2. Interfejs wyświetla okno wyboru rodzaju potwierdzenia
+  3. Użytkownik wybiera potwierdzenie drukowane
+  4. Interfejs wysyła informację o potwierdzeniu drukowanym
+  5. System wysyła potwierdzenie do intefejsu
+  6. Interfejs drukuje potwierdzenie
+  7. Użytkownik odbiera potiwerdzenie
+  8. Interfejs wyświetla informację o zakończeniu procesu
+
+```mermaid
+sequenceDiagram
+  actor user as Użytkownik
+  participant ui as Interfejs biletomatu
+  participant sys as System biletomatu
+  user->>ui: Zakończenie transakcji
+  ui->>sys: Zakończenie transakcji
+  sys->>sys: Generowanie potwierdzenia
+  sys-->>ui: return
+  ui->>user: Okno wyboru rodzaju potwierdzenia
+
+  user-->>ui: Wybrany rodzaj potwierdzenia
+
+  alt Potwierdzenie Elektroniczne
+    ui->>sys: Żądanie potwierdzenia elektronicznego
+    sys->>sys: Wysłanie potwierdzenia elektronicznego
+    sys-->>ui: return
+  else Potwierdzenie Drukowane
+    ui->>sys: Pobranie potwierdzenia do druku
+    sys-->>ui: Potwierdzenie
+    ui->>user: Wydrukowanie potwierdzenie
+    user-->>ui: Odebranie potwierdzenia
+  end
+
+  ui->>user: Wyświetlenie informacji o zakończeniu procesu
+  user-->>ui: return
+  ui-->>user: return
 ```
