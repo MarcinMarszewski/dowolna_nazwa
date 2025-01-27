@@ -555,5 +555,5 @@ classDiagram
     + void continueTransaction()
   }
 
-  TicketMachineSystem <-- TicketMachineUI : Wyświetla Dane
+  TicketService <-- TicketMachineTicketView : Wyświetla Dane
 ```
