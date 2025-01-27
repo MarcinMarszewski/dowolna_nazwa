@@ -513,3 +513,48 @@ sequenceDiagram
   user-->>ui: return
   ui-->>user: return
 ```
+
+# Diagramy klas
+
+## Opis klas dla przypadku użycia "Wybór języka"
+### Klasy
+#### TicketMachineLanguageChangeView
+- Atrybuty: `List&lt;Language> languages`
+- Metody: `void showAvailableLanguageOptions()`, `void showPopularLanguageOptions()`, `void setNewLanguage(Language)`, `void cancelSettingNewLanguage()`
+
+#### TicketMachineMainView
+- Metody: `void showLanguageChangeView()`
+
+#### LanguageService
+- Atrybuty: `List&lt;Language> languages`
+- Metody: `List&lt;Language> getAvailableLanguages()`, `void setSessionLanguage()`
+
+### Relacje:
+- `TicketMachineView` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
+- `LanguageService` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
+
+## WIZUALIZACJA DIAGRAMU KLAS
+
+```mermaid
+classDiagram
+  class TicketMachineMainView {
+    + void showLanguageChangeView()
+  }
+
+  class TicketMachineLanguageChangeView {
+    - List&lt;Language> languages
+    + void showAvailableLanguageOptions()
+    + void showPopularLanguageOptions()
+    + void setNewLanguage(Language)
+    + void cancelSettingNewLanguage()
+  }
+
+  class LanguageService {
+    - List&lt;Language> languages
+    + List&lt;Language> getAvailableLanguages()
+    + void setSessionLanguage()
+  }
+
+  TicketMachineMainView --> TicketMachineLanguageChangeView : Wywołuje
+  TicketMachineLanguageChangeView --> LanguageService : Wyświetla dane
+```
