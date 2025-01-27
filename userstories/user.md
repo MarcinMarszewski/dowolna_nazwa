@@ -518,29 +518,29 @@ sequenceDiagram
 
 ## Opis klas dla przypadku użycia "Szybki wybór rodzaju biletu"
 ### Klasy
-#### TicketMachineUI
+#### TicketMachineTicketView
 - Atrybuty: `List<TicketCategory> ticketCategories`, `List<Ticket> availableTickets`, `Timer hintTimer`
-- Metody: `void showHint()`, `void showCategorySelectionWindow(ticketCategories)`, `void showTicketSelectionWindow(availableTickets)`, `void showSummary()`, `void chooseCategory(Category chosenCategory)`, `void chooseTicket(Ticket chosenTicket)`, `void chooseSummary(Boolean chosenOption)`
+- Metody: `void showHint()`, `void showCategorySelectionWindow()`, `void showTicketSelectionWindow()`, `void showSummary()`, `void chooseCategory()`, `void chooseTicket(Ticket chosenTicket)`, `void chooseSummary(Boolean chosenOption)`
 
-#### TicketMachineSystem
+#### TicketService
 - Atrybuty: `List<Ticket> tickets`
 - Metody: `List<Ticket> getTickets()`, `void cancelTransaction()`, `void continueTransaction()`
 
 ### Relacje:
-- `TicketMachineUI` powiązany z `TicketMachineSystem` (Asocjacja)
+- `TicketMachineTicketView` powiązany z `TicketService` (Asocjacja)
 
 ## WIZUALIZACJA DIAGRAMU KLAS
 
 ```mermaid
 classDiagram
-  class TicketMachineUI {
+  class TicketMachineTicketView {
     - List&lt;TicketCategory> ticketCategories
     - List&lt;Ticket> availableTickets
     - Timer hintTimer
 
     + void showHint()
-    + void showCategorySelectionWindow(ticketCategories)
-    + void showTicketSelectionWindow(availableTickets)
+    + void showCategorySelectionWindow()
+    + void showTicketSelectionWindow()
     + void showSummary()
 
     + void chooseCategory(Category chosenCategory)
@@ -548,7 +548,7 @@ classDiagram
     + void chooseSummary(Boolean chosenOption)
   }
 
-  class TicketMachineSystem {
+  class TicketService {
     - List&lt;Ticket> tickets
     + List&lt;Ticket> getTickets()
     + void cancelTransaction()
