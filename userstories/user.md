@@ -621,3 +621,60 @@ classDiagram
   TicketMachineMainView --> TicketMachineLanguageChangeView : Wywołuje
   TicketMachineLanguageChangeView --> LanguageService : Wyświetla dane
 ```
+
+## Opis klas dla przypadku użycia "Otrzymanie potwierdzenia zakupu"
+### Klasy
+#### TicketMachineSaleConfirmView
+- Atrybuty: `TransactionDetails details`
+- Metody: `void showConfirmationMessage(TransactionDetails)`, `void showConfirmationTypeWindow()`, `void chooseConfirmationType(boolean isElectronic)`, `void chooseEndTransaction()`
+
+#### TicketService
+- Metody: `void printConfirmation(TransactionDetails details)`, `void generateTicket(Ticket ticket)`
+
+#### TransactionService
+- Metody: `void GenerateElectronicConfirmation(TransactionDetails details)`, `void GeneratePrintedConfirmation(TransactionDetails details)`, `void endTransaction()`
+
+#### TransactionDetails
+- Atrybuty: `DateTime date`, `Long id`, `List<Ticket> tickets`, `String paymentMethod`, `Double totalCost`
+
+#### Ticket
+- Atrybuty: `String name`, `Double cost`
+
+### Relacje:
+- `TransactionDetails` połączone z `TransactionService` (Asocjacja)
+- `TicketService` połączone z `TransactionService` (Asocjacja)
+- `TicketMachineSaleConfirmView` połączone z `TicketService` (Asocjacja)
+
+## WIZUALIZACJA DIAGRAMU KLAS
+```mermaid
+classDiagram
+  class TicketMachineSaleConfirmView {
+    - TransactionDetails details
+    + void showConfirmationMessage(TransactionDetails details)
+    + void showConfirmationTypeWindow()
+    + void chooseConfirmationType(boolean isElectronic)
+    + void chooseEndTransaction();
+  }
+
+  class TicketService {
+    + void printConfirmation(TransactionDetails details)
+    + void generateTicket(Ticket ticket)
+  }
+
+  class TransactionService {
+    + void GenerateElectronicConfirmation(TransactionDetails details)
+    + void GeneratePrintedConfirmation(TransactionDetails details)
+    + void endTransaction()
+  }
+
+  class TransactionDetails {
+    - DateTime date
+    - Long id
+    - List<Ticket> tickets
+    - String paymentMethod
+    - Double totalCost
+  }
+
+  TicketMachineSaleConfirmView <-- TicketService : Obsługuje
+  TicketService <-- TransactionService : Obsługuje
+```
