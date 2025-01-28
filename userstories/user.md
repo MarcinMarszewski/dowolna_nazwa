@@ -516,6 +516,64 @@ sequenceDiagram
 
 # Diagramy klas
 
+## Opis klas dla przypadku użycia "Szybki wybór rodzaju biletu"
+### Klasy
+#### TicketMachineTicketView
+- Atrybuty: `List<TicketCategory> ticketCategories`, `List<Ticket> availableTickets`, `Timer hintTimer`
+- Metody: `void showHint()`, `void showCategorySelectionWindow()`, `void showTicketSelectionWindow()`, `void showSummary()`, `void chooseCategory()`, `void chooseTicket(Ticket chosenTicket)`, `void chooseSummary(Boolean chosenOption)`
+
+#### TicketService
+- Atrybuty: `List<Ticket> tickets`
+- Metody: `List<Ticket> getTickets()`, `List<TicketCategory> getCategories()`, `void cancelTransaction()`, `void continueTransaction()`
+
+#### Ticket
+- Atrybuty: `TicketCategory category`, `String name`
+#### TicketCategory
+- Atrybuty: `String name`
+
+### Relacje:
+- `TicketMachineTicketView` powiązany z `TicketService` (Asocjacja)
+- `Ticket` powiązany z `TicketCategory` (Asocjacja)
+
+## WIZUALIZACJA DIAGRAMU KLAS
+
+```mermaid
+classDiagram
+  class TicketMachineTicketView {
+    - List&lt;TicketCategory> ticketCategories
+    - List&lt;Ticket> availableTickets
+    - Timer hintTimer
+
+    + void showHint()
+    + void showCategorySelectionWindow()
+    + void showTicketSelectionWindow()
+    + void showSummary()
+
+    + void chooseCategory(Category chosenCategory)
+    + void chooseTicket(Ticket chosenTicket)
+    + void chooseSummary(Boolean chosenOption)
+  }
+
+  class TicketService {
+    - List&lt;Ticket> tickets
+    + List&lt;Ticket> getTickets()
+    + List&lt;TicketCategory> getCategories()
+    + void cancelTransaction()
+    + void continueTransaction()
+  }
+
+  class Ticket {
+    - String name
+  }
+
+  class TicketCategory {
+    - String name
+  }
+
+  TicketService <-- TicketMachineTicketView : Wyświetla Dane
+  TicketCategory --> Ticket : Opisuje
+```
+
 ## Opis klas dla przypadku użycia "Wybór języka"
 ### Klasy
 #### TicketMachineLanguageChangeView
@@ -534,7 +592,6 @@ sequenceDiagram
 - `LanguageService` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
 
 ## WIZUALIZACJA DIAGRAMU KLAS
-
 ```mermaid
 classDiagram
   class Language {
