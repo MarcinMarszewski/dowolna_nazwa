@@ -621,3 +621,58 @@ classDiagram
   TicketMachineMainView --> TicketMachineLanguageChangeView : Wywołuje
   TicketMachineLanguageChangeView --> LanguageService : Wyświetla dane
 ```
+
+## Opis klas dla przypadku użycia "Sprawdzenie poprawnosci transakcji"
+### Klasy
+#### TransactionData
+- Atrybuty: `UUID userID`, `Ticket ticket`
+
+#### TicketTicketingView
+- Atrybuty: `TransactionData transactionData`
+- Metody: `void showError()`, `void showGoodbyeMessage()`, `void confirmChoice()`, `void setTransaction(TransactionData)`, `void cancelTransaction()`
+
+#### TransactionService
+- Metody: `void handleTransaction(TransactionData)`
+
+- #### TicketingService
+- Atrybuty: `TransactionData transactionData`
+- Metody: `boolean isChoiceCorrect(TransactionData)`, `void cancelTransaction()`, `void setTransactionData(TransactionData)`
+
+### Relacje:
+- `TicketMachineView` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
+- `LanguageService` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
+- `TicketTicketingView` powiązany z `TicketingService` (Asocjacja)
+- `TicketingService` powiązany z `TransactionService` (Asocjacja)
+
+## WIZUALIZACJA DIAGRAMU KLAS
+```mermaid
+classDiagram
+
+  class TransactionData {
+    - UUID userID
+    - Ticket ticket
+  }
+
+  class TicketTicketingView {
+    - TransactionData transactionData
+    + void showError()
+    + void showGoodbyeMessage()
+    + void confirmChoice()
+    + void setTransaction(TransactionData)
+    + void cancelTransaction()
+  }
+
+  class TransactionService {
+    + void handleTransaction(TransactionData)
+  }
+
+class TicketingService {
+    - TransactionData transactionData
+    + boolean isChoiceCorrect(TransactionData)
+    + void cancelTransaction()
+    + void setTransactionData(TransactionData)
+  }
+
+  TicketTicketingView --> TicketingService : Wywołuje
+  TicketingService --> TransactionService : Wywoluje
+```
