@@ -520,7 +520,7 @@ sequenceDiagram
 ### Klasy
 #### TicketMachineLanguageChangeView
 - Atrybuty: `List&lt;Language> languages`, `Language defaultLanguage`
-- Metody: `void showAvailableLanguageOptions()`, `void showPopularLanguageOptions()`, `void setNewLanguage(Language)`, `void cancelSettingNewLanguage()`
+- Metody: `void showAvailableLanguageOptions()`, `void showPopularLanguageOptions()`, `void setNewLanguage(Language)`, `void cancelSettingNewLanguage()`, `void setDefaultLanguage()`
 
 #### TicketMachineMainView
 - Metody: `void showLanguageChangeView()`
