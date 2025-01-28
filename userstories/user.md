@@ -537,14 +537,18 @@ sequenceDiagram
 
 ```mermaid
 classDiagram
+  class Language {
+  - string Name
+  }
+
   class TicketMachineMainView {
     + void showLanguageChangeView()
   }
 
   class TicketMachineLanguageChangeView {
     - List&lt;Language> languages
-    + void showAvailableLanguageOptions()
     - Language defaultLanguage
+    + void showAvailableLanguageOptions()
     + void showPopularLanguageOptions()
     + void setDefaultLanguage()
     + void setNewLanguage(Language)
