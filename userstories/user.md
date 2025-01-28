@@ -524,10 +524,16 @@ sequenceDiagram
 
 #### TicketService
 - Atrybuty: `List<Ticket> tickets`
-- Metody: `List<Ticket> getTickets()`, `void cancelTransaction()`, `void continueTransaction()`
+- Metody: `List<Ticket> getTickets()`, `List<TicketCategory> getCategories()`, `void cancelTransaction()`, `void continueTransaction()`
+
+#### Ticket
+- Atrybuty: `TicketCategory category`, `String name`
+#### TicketCategory
+- Atrybuty: `String name`
 
 ### Relacje:
 - `TicketMachineTicketView` powiązany z `TicketService` (Asocjacja)
+- `Ticket` powiązany z `TicketCategory` (Asocjacja)
 
 ## WIZUALIZACJA DIAGRAMU KLAS
 
@@ -551,9 +557,19 @@ classDiagram
   class TicketService {
     - List&lt;Ticket> tickets
     + List&lt;Ticket> getTickets()
+    + List&lt;TicketCategory> getCategories()
     + void cancelTransaction()
     + void continueTransaction()
   }
 
+  class Ticket {
+    - String name
+  }
+
+  class TicketCategory {
+    - String name
+  }
+
   TicketService <-- TicketMachineTicketView : Wyświetla Dane
+  TicketCategory --> Ticket : Opisuje
 ```
