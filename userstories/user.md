@@ -593,6 +593,7 @@ classDiagram
 
 ## WIZUALIZACJA DIAGRAMU KLAS
 ```mermaid
+classDiagram
   class Language {
   - string Name
   }
