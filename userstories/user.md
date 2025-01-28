@@ -544,7 +544,9 @@ classDiagram
   class TicketMachineLanguageChangeView {
     - List&lt;Language> languages
     + void showAvailableLanguageOptions()
+    - Language defaultLanguage
     + void showPopularLanguageOptions()
+    + void setDefaultLanguage()
     + void setNewLanguage(Language)
     + void cancelSettingNewLanguage()
   }
