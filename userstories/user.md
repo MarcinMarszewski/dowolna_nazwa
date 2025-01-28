@@ -519,7 +519,7 @@ sequenceDiagram
 ## Opis klas dla przypadku użycia "Wybór języka"
 ### Klasy
 #### TicketMachineLanguageChangeView
-- Atrybuty: `List&lt;Language> languages`
+- Atrybuty: `List&lt;Language> languages`, `Language defaultLanguage`
 - Metody: `void showAvailableLanguageOptions()`, `void showPopularLanguageOptions()`, `void setNewLanguage(Language)`, `void cancelSettingNewLanguage()`
 
 #### TicketMachineMainView
