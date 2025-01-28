@@ -624,20 +624,25 @@ classDiagram
 
 ## Opis klas dla przypadku użycia "Sprawdzenie poprawnosci transakcji"
 ### Klasy
-#### TicketMachineLanguageChangeView
-- Atrybuty: `List&lt;Language> languages`, `Language defaultLanguage`
-- Metody: `void showAvailableLanguageOptions()`, `void showPopularLanguageOptions()`, `void setNewLanguage(Language)`, `void cancelSettingNewLanguage()`, `void setDefaultLanguage()`
+#### TransactionData
+- Atrybuty: `UUID userID`, `Ticket ticket`
 
-#### TicketMachineMainView
-- Metody: `void showLanguageChangeView()`
+#### TicketTicketingView
+- Atrybuty: `TransactionData transactionData`
+- Metody: `void showError()`, `void showGoodbyeMessage()`, `void confirmChoice()`, `void setTransaction(TransactionData)`, `void cancelTransaction()`
 
-#### LanguageService
-- Atrybuty: `List&lt;Language> languages`
-- Metody: `List&lt;Language> getAvailableLanguages()`, `void setSessionLanguage()`
+#### TransactionService
+- Metody: `void handleTransaction(TransactionData)`
+
+- #### TicketingService
+- Atrybuty: `TransactionData transactionData`
+- Metody: `boolean isChoiceCorrect(TransactionData)`, `void cancelTransaction()`, `void setTransactionData(TransactionData)`
 
 ### Relacje:
 - `TicketMachineView` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
 - `LanguageService` powiązany z `TicketMachineLanguageChangeView` (Asocjacja)
+- `TicketTicketingView` powiązany z `TicketingService` (Asocjacja)
+- `TicketingService` powiązany z `TransactionService` (Asocjacja)
 
 ## WIZUALIZACJA DIAGRAMU KLAS
 ```mermaid
